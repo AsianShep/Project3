@@ -20,7 +20,8 @@ h1 {
     margin-top: 3em;
     width: 10em;
     border-radius: 2em;
-    font-family: "Plus Jakarta Display", sans-serif;
+    font-weight: bold;
+    font-family: "Plus Jakarta Display";
 }
 
 #shit span {
@@ -32,7 +33,6 @@ h1 {
     vertical-align: middle;
     transform: translateY(1.4em);
 }
-
 
 #shit {
     margin-top: 2em;
@@ -46,14 +46,20 @@ h1 {
     animation: gradient 1s ease-in-out infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
 }
 
 #btn1 {
     display: inline;
     margin-top: 5em;
     padding-top: 5em;
+    border-radius: 2em;
 
+}
+
+#btnm {
+    border-radius: 100px;
+    font-weight: bold;
+    font-family: "Plus Jakarta Display";
 }
 #sort {
     font-weight: bold;;
@@ -97,7 +103,7 @@ h1 {
 
 .button-container {
     margin-top: 1.5em;
-    padding-top: 2em; /* Add this line */
+    padding-top: 2em;
 }
 
 
