@@ -1,28 +1,4 @@
 @import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css");
-
-h1 {
-    font-size: 4em;
-    text-align: center;
-    font-family: "Plus Jakarta Display", sans-serif;
-}
-#shit select {
-    margin-top: 6em;
-    width: 10em;
-    border-radius: 2em;
-}
-#shit span {
-    font-weight: bold;;
-    font-size: 2em;
-    text-align: center;
-    font-family: "Plus Jakarta Display", sans-serif;
-    display: inline-block;
-    vertical-align: middle;
-    
-    transform: translateY(1.4em);
-}
-#shit {
-    margin-top: 2em;
-}
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -34,6 +10,34 @@ h1 {
 		background-position: 0% 50%;
 	}
 }
+h1 {
+    font-size: 4em;
+    text-align: center;
+    font-family: "Plus Jakarta Display", sans-serif;
+}
+
+#shit select {
+    margin-top: 6em;
+    width: 10em;
+    border-radius: 2em;
+    font-family: "Plus Jakarta Display", sans-serif;
+}
+
+#shit span {
+    font-weight: bold;;
+    font-size: 2em;
+    text-align: center;
+    font-family: "Plus Jakarta Display", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    
+    transform: translateY(1.4em);
+}
+
+#shit {
+    margin-top: 2em;
+}
+
 #h1b {
     font-weight: bold;
     color: white;
@@ -49,4 +53,25 @@ h1 {
     display: block;
     margin-top: 5em;
 
+}
+#sort {
+    font-weight: bold;;
+    font-size: 2em;
+    text-align: left;
+    font-family: "Plus Jakarta Display", sans-serif;
+    display: inline;
+}
+#sort span {
+    font-weight: bold;
+    text-align: left;
+    font-family: "Plus Jakarta Display", sans-serif;
+    display: inline;
+    transform: translateY(2.45em);
+}
+
+#ss1 {
+    margin-top: 10em;
+    width: 10em;
+    border-radius: 2em;
+    display: inline;
 }
