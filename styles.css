@@ -17,22 +17,22 @@ h1 {
 }
 
 #shit select {
-    margin-top: 6em;
+    margin-top: 3em;
     width: 10em;
     border-radius: 2em;
     font-family: "Plus Jakarta Display", sans-serif;
 }
 
 #shit span {
-    font-weight: bold;;
+    font-weight: bold;
     font-size: 2em;
     text-align: center;
     font-family: "Plus Jakarta Display", sans-serif;
     display: inline-block;
     vertical-align: middle;
-    
     transform: translateY(1.4em);
 }
+
 
 #shit {
     margin-top: 2em;
@@ -50,8 +50,9 @@ h1 {
 }
 
 #btn1 {
-    display: block;
+    display: inline;
     margin-top: 5em;
+    padding-top: 5em;
 
 }
 #sort {
@@ -75,3 +76,37 @@ h1 {
     border-radius: 2em;
     display: inline;
 }
+
+#sz {
+    margin-left: 5em;
+}
+.option-container {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    flex-direction: column;
+}
+
+#buffer {
+    margin-bottom: 7em;
+}
+
+.select-container {
+    margin-bottom: 1.5em;
+}
+
+.button-container {
+    margin-top: 1.5em;
+    padding-top: 2em; /* Add this line */
+}
+
+
+@media (min-width: 768px) {
+    .button-container {
+      transform: translateY(-14em);
+      display: inline;
+      margin-top: 5em;
+      padding-top: 5em;
+    }
+  }
+  
