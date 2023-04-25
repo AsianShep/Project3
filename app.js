@@ -91,6 +91,6 @@ let merge = (arr, left, mid, right, prop) => {
     });
   }
   
-//fetchAndParseCSV('food.csv');
+fetchAndParseCSV('food.csv');
 
 
