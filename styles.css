@@ -45,6 +45,8 @@ h1 {
 
 }
 
-body {
-    height: 100vh;
+#btn1 {
+    display: block;
+    margin-top: 5em;
+
 }
