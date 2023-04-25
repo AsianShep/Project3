@@ -57,8 +57,24 @@ let merge = (arr, left, mid, right, prop) => {
   
       merge(arr, left, mid, right, prop);
     }
+
   }
   
+  let shellSort = (arr, prop) => {
+    let gap = Math.floor(arr.length / 2);
+	  while (gap > 0) {
+		  for (let i = gap; i < arr.length; i++) {
+			  for (let j = i; j >= gap; j = j - gap) {
+				  if (arr[j][prop] < arr[j - gap][prop]) {
+					  [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
+				  }
+				  else
+					  break;
+			  }
+		  }
+	  }
+	  gap = Math.floor(gap / 2);
+  }
   async function fetchAndParseCSV(url) {
     const response = await fetch(url);
     const csvData = await response.text();
