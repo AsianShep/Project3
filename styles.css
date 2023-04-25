@@ -6,7 +6,7 @@ h1 {
     font-family: "Plus Jakarta Display", sans-serif;
 }
 #shit select {
-    margin-top: 10em;
+    margin-top: 6em;
     width: 10em;
     border-radius: 2em;
 }
@@ -18,7 +18,7 @@ h1 {
     display: inline-block;
     vertical-align: middle;
     
-    transform: translateY(2.45em);
+    transform: translateY(1.4em);
 }
 #shit {
     margin-top: 2em;

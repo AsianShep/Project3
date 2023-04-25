@@ -73,7 +73,6 @@ let merge = (arr, left, mid, right, prop) => {
           parseFloat(row["Data.Sugar Total"])
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.calories));
-        console.log('Food objects array:', foodArr);
             
         mergeSort(foodArr, 0, foodArr.length - 1, "calories");
         console.log('Sorted food objects array by calories:', foodArr);
