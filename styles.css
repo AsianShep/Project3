@@ -1,0 +1,50 @@
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css");
+
+h1 {
+    font-size: 4em;
+    text-align: center;
+    font-family: "Plus Jakarta Display", sans-serif;
+}
+#shit select {
+    margin-top: 10em;
+    width: 10em;
+    border-radius: 2em;
+}
+#shit span {
+    font-weight: bold;;
+    font-size: 2em;
+    text-align: center;
+    font-family: "Plus Jakarta Display", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+    
+    transform: translateY(2.45em);
+}
+#shit {
+    margin-top: 2em;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+#h1b {
+    font-weight: bold;
+    color: white;
+    font-size: 72px;
+    background: linear-gradient(-45deg, #6b9fff, #7797ff, #b473ff, #cc74ff);
+    animation: gradient 1s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+body {
+    height: 100vh;
+}
