@@ -21,6 +21,8 @@ class Food {
   let fiberString = localStorage.getItem('fiberString');
   let sugarString = localStorage.getItem('sugarString');
   let proteinString = localStorage.getItem('proteinString');
+  let sortString = localStorage.getItem('sortString');
+  let timeTaken = 0;
   
 
 let merge = (arr, left, mid, right, prop) => {
@@ -124,7 +126,6 @@ function shellSort(arr,prop)
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
         
-        
           
         for (let i = 0; i < foodArr.length; i++) {
           const food = foodArr[i];
@@ -190,11 +191,25 @@ function shellSort(arr,prop)
           
         
 
+        if (sortString == "Merge") {
+          const startTime = performance.now();
+          mergeSort(foodArr, 0, foodArr.length - 1, "rank");
+          const endTime = performance.now();
+          timeTaken = (endTime - startTime).toFixed(4);
+          document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
+        } else {
+          const startTime = performance.now();
+          shellSort(foodArr, "rank");
+          const endTime = performance.now();
+          timeTaken = (endTime - startTime).toFixed(4);
+          document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
+        }
+        
 
-        shellSort(foodArr, "rank");
-        // mergeSort(foodArr, 0, foodArr.length - 1, "fiber");
+
+
         const ul = document.querySelector("#foodapp");
-        for(let i = 0; i < 300; i++) {
+        for(let i = 0; i < 500; i++) {
           const newLI = document.createElement("li");
           const ulE = document.createElement("ul");
           const newLI1 = document.createElement("li");
@@ -240,17 +255,23 @@ function shellSort(arr,prop)
     sugarString = sugarOption.options[sugarOption.selectedIndex].text;
     let proteinOption = document.querySelector(".protein-select");
     proteinString = proteinOption.options[proteinOption.selectedIndex].text;
-  
+    let sortOption = document.querySelector(".sort-select");
+    sortString = sortOption.options[sortOption.selectedIndex].text;
+    
     localStorage.setItem('carbString', carbString);
     localStorage.setItem('fatString', fatString);
     localStorage.setItem('cholesterolString', cholesterolString);
     localStorage.setItem('fiberString', fiberString);
     localStorage.setItem('sugarString', sugarString);
     localStorage.setItem('proteinString', proteinString);
-  
+    localStorage.setItem('sortString', sortString);
     window.location.href = "searchres.html";
   }
   
+
+  const clickMe2 = () => {
+    window.location.href = "index.html";
+  }
 
 if (window.location.pathname.includes('searchres.html')) {
   document.addEventListener('DOMContentLoaded', () => {

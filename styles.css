@@ -126,10 +126,43 @@ h1 {
 
   li {
     font-family: "Plus Jakarta Display";
+    font-weight: bold;
+    
   }
   #olz {
     display: flex;
     justify-content: center;
     align-items: center;
+    
    
   }
+
+  #timeTaken {
+    text-align: center;
+    font-weight: bold;
+    font-family: "Plus Jakarta Display";
+  }
+
+  #foodapp {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  #btnm2 {
+    border-radius: 100px;
+    font-weight: bold;
+    font-family: "Plus Jakarta Display";
+    font-size: 1.2em;
+    width: auto;
+    height: auto;
+    display: inline;
+  }
+
+  @media (max-width: 768px) {
+    #btnm2 {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  
