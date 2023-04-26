@@ -123,3 +123,13 @@ h1 {
     }
   }
   
+
+  li {
+    font-family: "Plus Jakarta Display";
+  }
+  #olz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+  }
