@@ -97,19 +97,6 @@ let merge = (arr, left, mid, right, prop) => {
           parseFloat(row["Data.Protein"])
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
-
-        let carbOption = document.querySelector("carb-select");
-        var carbString = carbOption.options[carbOption.selectedIndex].text;
-        let fatOption = document.querySelector("fat-select");
-        var fatString = fatOption.options[fatOption.selectedIndex].text;
-        let cholOption = document.querySelector("cholesterol-select");
-        var cholString = cholOption.options[cholOption.selectedIndex].text;
-        let fiberOption = document.querySelector("fiber-select");
-        var fiberString = fiberOption.options[fiberOption.selectedIndex].text;
-        let sugarOption = document.querySelector("sugar-select");
-        var sugarString = sugarOption.options[sugarOption.selectedIndex].text;
-        let proteinSelect = document.querySelector("protein-select");
-        var proteinString = proteinOption.options[proteinOption.selectedIndex].text;
         // shellSort(foodArr, "fiber");
 
         mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
@@ -142,6 +129,18 @@ let merge = (arr, left, mid, right, prop) => {
   
 
 const clickMe = () => {
+  let carbOption = document.querySelector(".carb-select");
+  let carbString = carbOption.options[carbOption.selectedIndex].text;
+  let fatOption = document.querySelector(".fat-select");
+  let fatString = fatOption.options[fatOption.selectedIndex].text;
+  let cholOption = document.querySelector(".cholesterol-select");
+  let cholString = cholOption.options[cholOption.selectedIndex].text;
+  let fiberOption = document.querySelector(".fiber-select");
+  let fiberString = fiberOption.options[fiberOption.selectedIndex].text;
+  let sugarOption = document.querySelector(".sugar-select");
+  let sugarString = sugarOption.options[sugarOption.selectedIndex].text;
+  let proteinOption = document.querySelector(".protein-select");
+  let proteinString = proteinOption.options[proteinOption.selectedIndex].text;
   window.location.href = "searchres.html";
 }
 
