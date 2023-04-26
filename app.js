@@ -1,5 +1,5 @@
 class Food {
-    constructor(name, carbohydrate, cholesterol, fat, fiber, sugar) {
+    constructor(name, carbohydrate, cholesterol, fat, fiber, sugar, protein) {
       this.name = name;
       this.carbohydrate = carbohydrate;
       this.cholesterol = cholesterol;
@@ -98,17 +98,17 @@ let merge = (arr, left, mid, right, prop) => {
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
 
-        let carbOption = document.getElementsById("carb-select");
+        let carbOption = document.querySelector("carb-select");
         var carbString = carbOption.options[carbOption.selectedIndex].text;
-        let fatOption = document.getElementById("fat-select");
+        let fatOption = document.querySelector("fat-select");
         var fatString = fatOption.options[fatOption.selectedIndex].text;
-        let cholOption = document.getElementById("cholesterol-select");
+        let cholOption = document.querySelector("cholesterol-select");
         var cholString = cholOption.options[cholOption.selectedIndex].text;
-        let fiberOption = document.getElementById("fiber-select");
+        let fiberOption = document.querySelector("fiber-select");
         var fiberString = fiberOption.options[fiberOption.selectedIndex].text;
-        let sugarOption = document.getElementById("sugar-select");
+        let sugarOption = document.querySelector("sugar-select");
         var sugarString = sugarOption.options[sugarOption.selectedIndex].text;
-        let proteinSelect = document.getElementById("protein-select");
+        let proteinSelect = document.querySelector("protein-select");
         var proteinString = proteinOption.options[proteinOption.selectedIndex].text;
         // shellSort(foodArr, "fiber");
 
