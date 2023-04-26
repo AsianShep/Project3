@@ -289,7 +289,7 @@ otherButton.onclick = function() {
     searchBtn.style.margin = "20px";
 
     // Add an event listener to the search button
-    searchBtn.addEventListener("click", function() {
+    searchBtn.addEventListener('click', function() {
         var searchTerm = searchBar.value;
         var resultWindow = window.open("", "resultWindow", "width=600, height=400");
         resultWindow.document.write("<h1>Search Query: " + searchTerm + "</h1>");
