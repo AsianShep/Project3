@@ -2,11 +2,12 @@ class Food {
     constructor(name, carbohydrate, cholesterol, fat, fiber, sugar) {
       this.name = name;
       this.carbohydrate = carbohydrate;
-      this.choslesterol = cholesterol;
+      this.cholesterol = cholesterol;
       this.fat = fat;
       this.fiber = fiber;
       this.sugar = sugar;
       this.protein = protein;
+      this.rank = 0;
     }
   }
 
@@ -96,6 +97,7 @@ let merge = (arr, left, mid, right, prop) => {
           parseFloat(row["Data.Protein"])
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
+
         let carbOption = document.getElementsById("carb-select");
         var carbString = carbOption.options[carbOption.selectedIndex].text;
         let fatOption = document.getElementById("fat-select");
@@ -108,23 +110,43 @@ let merge = (arr, left, mid, right, prop) => {
         var sugarString = sugarOption.options[sugarOption.selectedIndex].text;
         let proteinSelect = document.getElementById("protein-select");
         var proteinString = proteinOption.options[proteinOption.selectedIndex].text;
-        mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
-        console.log('Sorted food objects array by carbohydrates:', foodArr);
-        const ul = document.querySelector("#foodapp");
+        // shellSort(foodArr, "fiber");
 
+        mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
+        const ul = document.querySelector("#foodapp");
         for(let i = 0; i < foodArr.length; i++) {
           const newLI = document.createElement("li");
+          const ulE = document.createElement("ul");
           const newLI1 = document.createElement("li");
+          const newLI2 = document.createElement("li");
+          const newLI3 = document.createElement("li");
+          const newLI4 = document.createElement("li");
+          const newLI5 = document.createElement("li");
           newLI.innerText = foodArr[i].name;
           newLI1.innerText = "Carbohydrates: " + foodArr[i].carbohydrate;
-          newLI.append(newLI1);
+          newLI2.innerText = "Sugar: " + foodArr[i].sugar;
+          newLI3.innerText = "Fat: " + foodArr[i].fat;
+          newLI4.innerText = "Fiber: " + foodArr[i].fiber;
+          newLI5.innerText = "Cholesterol: " + foodArr[i].cholesterol;
+          ulE.append(newLI1);
+          ulE.append(newLI2);
+          ulE.append(newLI3);
+          ulE.append(newLI4);
+          ulE.append(newLI5);
+          newLI.append(ulE);
           ul.append(newLI);
-      
         }
       },
     });
   }
   
-fetchAndParseCSV('food.csv');
 
+const clickMe = () => {
+  window.location.href = "searchres.html";
+}
 
+if (window.location.pathname.includes('searchres.html')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchAndParseCSV('food.csv');
+  });
+}
