@@ -97,11 +97,17 @@ let merge = (arr, left, mid, right, prop) => {
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
         let carbOption = document.getElementsById("carb-select");
+        var carbString = carbOption.options[carbOption.selectedIndex].text;
         let fatOption = document.getElementById("fat-select");
+        var fatString = fatOption.options[fatOption.selectedIndex].text;
         let cholOption = document.getElementById("cholesterol-select");
+        var cholString = cholOption.options[cholOption.selectedIndex].text;
         let fiberOption = document.getElementById("fiber-select");
+        var fiberString = fiberOption.options[fiberOption.selectedIndex].text;
         let sugarOption = document.getElementById("sugar-select");
+        var sugarString = sugarOption.options[sugarOption.selectedIndex].text;
         let proteinSelect = document.getElementById("protein-select");
+        var proteinString = proteinOption.options[proteinOption.selectedIndex].text;
         mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
         console.log('Sorted food objects array by carbohydrates:', foodArr);
         const ul = document.querySelector("#foodapp");
