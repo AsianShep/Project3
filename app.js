@@ -14,6 +14,15 @@ class Food {
   let foodArr = [];
   let foodArrz = [];
 
+
+  let carbString = localStorage.getItem('carbString');
+  let fatString = localStorage.getItem('fatString');
+  let cholesterolString = localStorage.getItem('cholesterolString');
+  let fiberString = localStorage.getItem('fiberString');
+  let sugarString = localStorage.getItem('sugarString');
+  let proteinString = localStorage.getItem('proteinString');
+  
+
 let merge = (arr, left, mid, right, prop) => {
     let n1 = mid - left + 1;
     let n2 = right - mid;
@@ -97,9 +106,57 @@ let merge = (arr, left, mid, right, prop) => {
           parseFloat(row["Data.Protein"])
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
-        // shellSort(foodArr, "fiber");
+        
+        
+          
+        for (let i = 0; i < foodArr.length; i++) {
+          const food = foodArr[i];
+          const ranges = {
+            carb: { low: 10, medium: 30 },
+            fiber: { low: 5, medium: 10 },
+            fat: { low: 10, medium: 30 },
+            cholesterol: { low: 100, medium: 200 },
+            sugar: { low: 10, medium: 30 },
+            protein: { low: 10, medium: 30 },
+          };
+        
+          const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
+          const levels = ['Low', 'Medium', 'High'];
+        
+          nutrients.forEach((nutrient) => {
+            const nutrientString = eval(`${nutrient}String`);
+            const nutrientVal = food[nutrient];
+            const lowRange = ranges[nutrient].low;
+            const mediumRange = ranges[nutrient].medium;
+            const isLow = nutrientVal <= lowRange;
+            const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
+        
+            levels.forEach((level) => {
+              if (nutrientString === level) {
+                if (level === 'Low') {
+                  const distanceFromLow = (nutrientVal - lowRange) * 0.1;
+                  const reducedValue = Math.min(distanceFromLow, 1);
+                  food.rank += isLow ? 1 : 1 - reducedValue;
+                } else if (level === 'Medium') {
+                  const distanceFromMiddle = Math.abs(nutrientVal - (lowRange + mediumRange) / 2) * 0.1;
+                  const reducedValue = Math.min(distanceFromMiddle, 1);
+                  food.rank += isMedium ? 1 : 1 - reducedValue;
+                } else if (level === 'High') {
+                  const distanceFromHigh = (mediumRange - nutrientVal) * 0.1;
+                  const reducedValue = Math.min(distanceFromHigh, 1);
+                  food.rank += !isMedium ? 1 : 1 - reducedValue;
+                }
+              }
+            });
+          });
+        }
+        
+          
+        
 
-        mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
+
+        // shellSort(foodArr, "fiber");
+        mergeSort(foodArr, 0, foodArr.length - 1, "rank");
         const ul = document.querySelector("#foodapp");
         for(let i = 0; i < 300; i++) {
           const newLI = document.createElement("li");
@@ -128,21 +185,30 @@ let merge = (arr, left, mid, right, prop) => {
   }
   
 
-const clickMe = () => {
-  let carbOption = document.querySelector(".carb-select");
-  let carbString = carbOption.options[carbOption.selectedIndex].text;
-  let fatOption = document.querySelector(".fat-select");
-  let fatString = fatOption.options[fatOption.selectedIndex].text;
-  let cholOption = document.querySelector(".cholesterol-select");
-  let cholString = cholOption.options[cholOption.selectedIndex].text;
-  let fiberOption = document.querySelector(".fiber-select");
-  let fiberString = fiberOption.options[fiberOption.selectedIndex].text;
-  let sugarOption = document.querySelector(".sugar-select");
-  let sugarString = sugarOption.options[sugarOption.selectedIndex].text;
-  let proteinOption = document.querySelector(".protein-select");
-  let proteinString = proteinOption.options[proteinOption.selectedIndex].text;
-  window.location.href = "searchres.html";
-}
+  const clickMe = () => {
+    let carbOption = document.querySelector(".carb-select");
+    carbString = carbOption.options[carbOption.selectedIndex].text;
+    let fatOption = document.querySelector(".fat-select");
+    fatString = fatOption.options[fatOption.selectedIndex].text;
+    let cholOption = document.querySelector(".cholesterol-select");
+    cholesterolString = cholOption.options[cholOption.selectedIndex].text;
+    let fiberOption = document.querySelector(".fiber-select");
+    fiberString = fiberOption.options[fiberOption.selectedIndex].text;
+    let sugarOption = document.querySelector(".sugar-select");
+    sugarString = sugarOption.options[sugarOption.selectedIndex].text;
+    let proteinOption = document.querySelector(".protein-select");
+    proteinString = proteinOption.options[proteinOption.selectedIndex].text;
+  
+    localStorage.setItem('carbString', carbString);
+    localStorage.setItem('fatString', fatString);
+    localStorage.setItem('cholesterolString', cholesterolString);
+    localStorage.setItem('fiberString', fiberString);
+    localStorage.setItem('sugarString', sugarString);
+    localStorage.setItem('proteinString', proteinString);
+  
+    window.location.href = "searchres.html";
+  }
+  
 
 if (window.location.pathname.includes('searchres.html')) {
   document.addEventListener('DOMContentLoaded', () => {
