@@ -64,10 +64,10 @@ let merge = (arr, left, mid, right, prop) => {
 
   }
   
-  let shellSort = (arr, prop) => {
+  /*let shellSort = (arr, prop) => {
     let gap = Math.floor(arr.length / 2);
 	  while (gap > 0) {
-		  for (let i = gap; i < arr.length; i++) {
+		  for (let i = gap; i < arr.length; i +=1) {
 			  for (let j = i; j >= gap; j = j - gap) {
 				  if (arr[j][prop] < arr[j - gap][prop]) {
 					  [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
@@ -78,7 +78,24 @@ let merge = (arr, left, mid, right, prop) => {
 		  }
 	  }
 	  gap = Math.floor(gap / 2);
-  }
+  }*/
+function shellSort(arr,prop)
+{
+    let n = arr.length;
+        for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2))
+        {
+          
+            for (let i = gap; i < n; i += 1)
+            {
+              
+                let temp = arr[i][prop];
+                let j;
+                for (j = i; j >= gap && arr[j - gap][prop] > temp; j -= gap) {
+                    [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
+                  }
+            }
+        }
+}
   
   async function fetchAndParseCSV(url) {
     const response = await fetch(url);
