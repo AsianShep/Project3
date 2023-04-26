@@ -1,8 +1,10 @@
 class Food {
-    constructor(name, calories, fat, sugar) {
+    constructor(name, carbohydrate, cholesterol, fat, fiber, sugar) {
       this.name = name;
-      this.calories = calories;
+      this.carbohydrate = carbohydrate;
+      this.choslesterol = cholesterol;
       this.fat = fat;
+      this.fiber = fiber;
       this.sugar = sugar;
       this.rank = 0;
     }
@@ -58,6 +60,23 @@ let merge = (arr, left, mid, right, prop) => {
   
       merge(arr, left, mid, right, prop);
     }
+
+  }
+  
+  let shellSort = (arr, prop) => {
+    let gap = Math.floor(arr.length / 2);
+	  while (gap > 0) {
+		  for (let i = gap; i < arr.length; i++) {
+			  for (let j = i; j >= gap; j = j - gap) {
+				  if (arr[j][prop] < arr[j - gap][prop]) {
+					  [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
+				  }
+				  else
+					  break;
+			  }
+		  }
+	  }
+	  gap = Math.floor(gap / 2);
   }
   
   async function fetchAndParseCSV(url) {
@@ -70,20 +89,22 @@ let merge = (arr, left, mid, right, prop) => {
         foodArrz = results.data.map(row => new Food(
           row["Description"],
           parseFloat(row["Data.Carbohydrate"]),
+          parseInt(row["Data.Cholesterol"]),
           parseFloat(row["Data.Fat.Total Lipid"]), 
+          parseFloat(row["Data.Fiber"]),
           parseFloat(row["Data.Sugar Total"])
         ));
-        foodArr = foodArrz.filter(food => !isNaN(food.calories));
+        foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
             
-        mergeSort(foodArr, 0, foodArr.length - 1, "calories");
-        console.log('Sorted food objects array by calories:', foodArr);
-        const ul = document.querySelector("#asscheeks");
+        mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
+        console.log('Sorted food objects array by carbohydrates:', foodArr);
+        const ul = document.querySelector("#foodapp");
 
         for(let i = 0; i < foodArr.length; i++) {
           const newLI = document.createElement("li");
           const newLI1 = document.createElement("li");
           newLI.innerText = foodArr[i].name;
-          newLI1.innerText = "Calories: " + foodArr[i].calories;
+          newLI1.innerText = "Carbohydrates: " + foodArr[i].carbohydrate;
           newLI.append(newLI1);
           ul.append(newLI);
       
