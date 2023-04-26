@@ -110,45 +110,50 @@ let merge = (arr, left, mid, right, prop) => {
         
           
         for (let i = 0; i < foodArr.length; i++) {
-          const food = foodArr[i];
-          const ranges = {
-            carb: { low: 10, medium: 30 },
-            fiber: { low: 5, medium: 10 },
-            fat: { low: 10, medium: 30 },
-            cholesterol: { low: 100, medium: 200 },
-            sugar: { low: 10, medium: 30 },
-            protein: { low: 10, medium: 30 },
-          };
-        
-          const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
-          const levels = ['Low', 'Medium', 'High'];
-        
-          nutrients.forEach((nutrient) => {
-            const nutrientString = eval(`${nutrient}String`);
-            const nutrientVal = food[nutrient];
-            const lowRange = ranges[nutrient].low;
-            const mediumRange = ranges[nutrient].medium;
-            const isLow = nutrientVal <= lowRange;
-            const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
-        
-            levels.forEach((level) => {
-              if (nutrientString === level) {
-                if (level === 'Low') {
-                  const distanceFromLow = (nutrientVal - lowRange) * 0.1;
-                  const reducedValue = Math.min(distanceFromLow, 1);
-                  food.rank += isLow ? 1 : 1 - reducedValue;
-                } else if (level === 'Medium') {
-                  const distanceFromMiddle = Math.abs(nutrientVal - (lowRange + mediumRange) / 2) * 0.1;
-                  const reducedValue = Math.min(distanceFromMiddle, 1);
-                  food.rank += isMedium ? 1 : 1 - reducedValue;
-                } else if (level === 'High') {
-                  const distanceFromHigh = (mediumRange - nutrientVal) * 0.1;
-                  const reducedValue = Math.min(distanceFromHigh, 1);
-                  food.rank += !isMedium ? 1 : 1 - reducedValue;
-                }
+          function calculateScore(value, lowRange, mediumRange, level, isHigh) {
+            if (level === 'Low') {
+              return value <= lowRange ? 1 : 1 - Math.min((value - lowRange) * 0.1, 1);
+            } else if (level === 'Medium') {
+              if (value <= lowRange) {
+                return 1 - Math.min((lowRange - value) * 0.1, 1);
+              } else if (value <= mediumRange) {
+                return 1;
+              } else {
+                return 1 - Math.min((value - mediumRange) * 0.1, 1);
               }
+            } else { // High
+              const score = value > mediumRange ? 1 : 1 - Math.min((mediumRange - value) * 0.1, 1);
+              return isHigh ? score * 5 : score;
+            }
+          }
+          
+          for (let i = 0; i < foodArr.length; i++) {
+            const food = foodArr[i];
+            const ranges = {
+              carb: { low: 10, medium: 30 },
+              fiber: { low: 5, medium: 10 },
+              fat: { low: 10, medium: 30 },
+              cholesterol: { low: 100, medium: 200 },
+              sugar: { low: 10, medium: 30 },
+              protein: { low: 10, medium: 30 },
+            };
+          
+            const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
+          
+            let score = 0;
+            nutrients.forEach((nutrient) => {
+              const nutrientString = eval(`${nutrient}String`);
+              const nutrientVal = food[nutrient];
+              const lowRange = ranges[nutrient].low;
+              const mediumRange = ranges[nutrient].medium;
+              const isHigh = nutrientString === 'High';
+          
+              score += calculateScore(nutrientVal, lowRange, mediumRange, nutrientString, isHigh);
             });
-          });
+          
+            food.rank = score;
+          }
+                   
         }
         
           
@@ -166,17 +171,20 @@ let merge = (arr, left, mid, right, prop) => {
           const newLI3 = document.createElement("li");
           const newLI4 = document.createElement("li");
           const newLI5 = document.createElement("li");
+          const newLI6 = document.createElement("li");
           newLI.innerText = foodArr[i].name;
           newLI1.innerText = "Carbohydrates: " + foodArr[i].carbohydrate;
           newLI2.innerText = "Sugar: " + foodArr[i].sugar;
           newLI3.innerText = "Fat: " + foodArr[i].fat;
           newLI4.innerText = "Fiber: " + foodArr[i].fiber;
           newLI5.innerText = "Cholesterol: " + foodArr[i].cholesterol;
+          newLI6.innerText = "Protein: " + foodArr[i].protein;
           ulE.append(newLI1);
           ulE.append(newLI2);
           ulE.append(newLI3);
           ulE.append(newLI4);
           ulE.append(newLI5);
+          ulE.append(newLI6);
           newLI.append(ulE);
           ul.append(newLI);
         }
