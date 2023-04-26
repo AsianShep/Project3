@@ -75,6 +75,7 @@ let merge = (arr, left, mid, right, prop) => {
 	  }
 	  gap = Math.floor(gap / 2);
   }
+  
   async function fetchAndParseCSV(url) {
     const response = await fetch(url);
     const csvData = await response.text();
