@@ -4,6 +4,7 @@ class Food {
       this.calories = calories;
       this.fat = fat;
       this.sugar = sugar;
+      this.rank = 0;
     }
   }
 
