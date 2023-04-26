@@ -6,6 +6,7 @@ class Food {
       this.fat = fat;
       this.fiber = fiber;
       this.sugar = sugar;
+      this.protein = protein;
     }
   }
 
@@ -91,10 +92,16 @@ let merge = (arr, left, mid, right, prop) => {
           parseInt(row["Data.Cholesterol"]),
           parseFloat(row["Data.Fat.Total Lipid"]), 
           parseFloat(row["Data.Fiber"]),
-          parseFloat(row["Data.Sugar Total"])
+          parseFloat(row["Data.Sugar Total"]),
+          parseFloat(row["Data.Protein"])
         ));
         foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
-            
+        let carbOption = document.getElementsById("carb-select");
+        let fatOption = document.getElementById("fat-select");
+        let cholOption = document.getElementById("cholesterol-select");
+        let fiberOption = document.getElementById("fiber-select");
+        let sugarOption = document.getElementById("sugar-select");
+        let proteinSelect = document.getElementById("protein-select");
         mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
         console.log('Sorted food objects array by carbohydrates:', foodArr);
         const ul = document.querySelector("#foodapp");
