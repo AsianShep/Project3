@@ -98,7 +98,7 @@ let merge = (arr, left, mid, right, prop) => {
         // shellSort(foodArr, "fiber");
         mergeSort(foodArr, 0, foodArr.length - 1, "carbohydrate");
         const ul = document.querySelector("#foodapp");
-        for(let i = 0; i < foodArr.length; i++) {
+        for(let i = 0; i < 300; i++) {
           const newLI = document.createElement("li");
           const ulE = document.createElement("ul");
           const newLI1 = document.createElement("li");
