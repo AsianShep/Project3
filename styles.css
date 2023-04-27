@@ -150,7 +150,7 @@ h1 {
     position: absolute;
     left: 0;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     #btnm2 {
       display: block;
       margin-left: auto;
