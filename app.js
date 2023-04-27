@@ -107,20 +107,21 @@ async function fetchAndParseCSV(url) {
       ));
       foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
       
-        
+
+
+      const ranges = {
+        carb: { low: 15, medium: 30 },
+        fiber: { low: 2, medium: 6 },
+        fat: { low: 5, medium: 15 },
+        cholesterol: { low: 5, medium: 20 },
+        sugar: { low: 5, medium: 15 },
+        protein: { low: 5, medium: 25 },
+      };
+      const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
+      const levels = ['Low', 'Medium', 'High'];
+      
       for (let i = 0; i < foodArr.length; i++) {
         const food = foodArr[i];
-        const ranges = {
-          carb: { low: 10, medium: 30 },
-          fiber: { low: 10, medium: 30 },
-          fat: { low: 10, medium: 30 },
-          cholesterol: { low: 10, medium: 30 },
-          sugar: { low: 10, medium: 30 },
-          protein: { low: 10, medium: 30 },
-        };
-      
-        const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
-        const levels = ['Low', 'Medium', 'High'];
       
         nutrients.forEach((nutrient) => {
           const nutrientString = eval(`${nutrient}String`);
@@ -145,11 +146,10 @@ async function fetchAndParseCSV(url) {
           const mediumRange = ranges[nutrient].medium;
           const isLow = nutrientVal <= lowRange;
           const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
-        
+          const weight = 1;
           levels.forEach((level) => {
+            alert(nutrientString);
             if (nutrientString === level) {
-              const weight = 1;
-        
               if (level === 'Low') {
                 const distanceFromLow = (nutrientVal - lowRange) * 0.1;
                 const reducedValue = Math.min(distanceFromLow, 1);
