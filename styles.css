@@ -148,7 +148,7 @@ h1 {
   }
   #legend {
     position: absolute;
-    right: 0;
+    left: 0;
   }
   @media (max-width: 768px) {
     #btnm2 {
