@@ -114,16 +114,6 @@ h1 {
     color: white;
     text-decoration: none;
 }
-@media (min-width: 768px) {
-    .button-container {
-      transform: translateY(-14em);
-      display: inline;
-      margin-top: 5em;
-      padding-top: 5em;
-    }
-  }
-  
-
   li {
     font-family: "Plus Jakarta Display";
     font-weight: bold;
@@ -156,17 +146,22 @@ h1 {
     height: auto;
     display: inline;
   }
-
+  #legend {
+    position: absolute;
+    right: 0;
+  }
   @media (max-width: 768px) {
     #btnm2 {
       display: block;
       margin-left: auto;
       margin-right: auto;
     }
-  }
-
-  #legend {
-    position: absolute;
+    #legend {
+      position: static;
+      display: flex;
+      justify-content: center;
+      right: auto;
+    }
   }
   
   @media (max-height: 700px) {
@@ -177,3 +172,12 @@ h1 {
       font-size: 3.5em;
     }
   }
+  @media (min-width: 768px) {
+    .button-container {
+      transform: translateY(-14em);
+      display: inline;
+      margin-top: 5em;
+      padding-top: 5em;
+    }
+  }
+  
