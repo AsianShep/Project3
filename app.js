@@ -144,7 +144,8 @@ async function fetchAndParseCSV(url) {
         parseInt(row["Data.Beta Cryptoxanthin"]),
         parseFloat(row["Data.Choline"]),
         parseInt(row["Data.Lutein and Zeaxanthin"]),
-        parseInt(row["Data.Lycopene"]),          parseFloat(row["Data.Niacin"]),
+        parseInt(row["Data.Lycopene"]),          
+        parseFloat(row["Data.Niacin"]),
         parseInt(row["Data.Retinol"]),
         parseFloat(row["Data.Riboflavin"]),
         parseFloat(row["Data.Selenium"]),
@@ -211,7 +212,6 @@ async function fetchAndParseCSV(url) {
           const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
           const weight = 1;
           levels.forEach((level) => {
-            alert(nutrientString);
             if (nutrientString === level) {
               if (level === 'Low') {
                 const distanceFromLow = (nutrientVal - lowRange) * 0.1;
