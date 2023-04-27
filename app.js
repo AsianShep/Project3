@@ -250,7 +250,7 @@ async function fetchAndParseCSV(url) {
       }
       
       const ul = document.querySelector("#foodapp");
-      for(let i = 0; i < 500; i++) {
+      for(let i = 0; i < 300; i++) {
         const newLI = document.createElement("li");
         const ulE = document.createElement("ul");
         const newLI1 = document.createElement("li");
