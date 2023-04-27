@@ -75,171 +75,152 @@ let merge = (arr, left, mid, right, prop) => {
 
   }
   
-  /*let shellSort = (arr, prop) => {
-    let gap = Math.floor(arr.length / 2);
-	  while (gap > 0) {
-		  for (let i = gap; i < arr.length; i +=1) {
-			  for (let j = i; j >= gap; j = j - gap) {
-				  if (arr[j][prop] < arr[j - gap][prop]) {
-					  [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
-				  }
-				  else
-					  break;
-			  }
-		  }
-	  }
-	  gap = Math.floor(gap / 2);
-  }*/
-function shellSort(arr,prop)
-{
-    let n = arr.length;
-        for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2))
-        {
-          
-            for (let i = gap; i < n; i += 1)
-            {
-              
-                let temp = arr[i][prop];
-                let j;
-                for (j = i; j >= gap && arr[j - gap][prop] < temp; j -= gap) {
-                    [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
-                  }
-            }
-        }
+
+let shellSort = (arr,prop) => {
+  let n = arr.length;
+    for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2)) {
+      for (let i = gap; i < n; i += 1) {
+          let temp = arr[i][prop];
+          let j;
+          for (j = i; j >= gap && arr[j - gap][prop] < temp; j -= gap) {
+              [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
+          }
+      }
+    }
 }
   
-  async function fetchAndParseCSV(url) {
-    const response = await fetch(url);
-    const csvData = await response.text();
-  
-    Papa.parse(csvData, {
-      header: true,
-      complete: (results) => {
-        foodArrz = results.data.map(row => new Food(
-          row["Description"],
-          parseFloat(row["Data.Carbohydrate"]),
-          parseInt(row["Data.Cholesterol"]),
-          parseFloat(row["Data.Fat.Total Lipid"]), 
-          parseFloat(row["Data.Fiber"]),
-          parseFloat(row["Data.Sugar Total"]),
-          parseFloat(row["Data.Protein"])
-        ));
-        foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
+async function fetchAndParseCSV(url) {
+  const response = await fetch(url);
+  const csvData = await response.text();
+
+  Papa.parse(csvData, {
+    header: true,
+    complete: (results) => {
+      foodArrz = results.data.map(row => new Food(
+        row["Description"],
+        parseFloat(row["Data.Carbohydrate"]),
+        parseInt(row["Data.Cholesterol"]),
+        parseFloat(row["Data.Fat.Total Lipid"]), 
+        parseFloat(row["Data.Fiber"]),
+        parseFloat(row["Data.Sugar Total"]),
+        parseFloat(row["Data.Protein"])
+      ));
+      foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
+      
         
-          
-        for (let i = 0; i < foodArr.length; i++) {
-          const food = foodArr[i];
-          const ranges = {
-            carb: { low: 10, medium: 30 },
-            fiber: { low: 10, medium: 30 },
-            fat: { low: 10, medium: 30 },
-            cholesterol: { low: 10, medium: 30 },
-            sugar: { low: 10, medium: 30 },
-            protein: { low: 10, medium: 30 },
-          };
+      for (let i = 0; i < foodArr.length; i++) {
+        const food = foodArr[i];
+        const ranges = {
+          carb: { low: 10, medium: 30 },
+          fiber: { low: 10, medium: 30 },
+          fat: { low: 10, medium: 30 },
+          cholesterol: { low: 10, medium: 30 },
+          sugar: { low: 10, medium: 30 },
+          protein: { low: 10, medium: 30 },
+        };
+      
+        const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
+        const levels = ['Low', 'Medium', 'High'];
+      
+        nutrients.forEach((nutrient) => {
+          const nutrientString = eval(`${nutrient}String`);
+          let nutrientVal;
         
-          const nutrients = ['carb', 'fiber', 'fat', 'cholesterol', 'sugar', 'protein'];
-          const levels = ['Low', 'Medium', 'High'];
         
-          nutrients.forEach((nutrient) => {
-            const nutrientString = eval(`${nutrient}String`);
-            let nutrientVal;
-          
-          
-            if (nutrient === 'carb') {
-              nutrientVal = food.carbohydrate;
-            } else if (nutrient === 'fiber') {
-              nutrientVal = food.fiber;
-            } else if (nutrient === 'fat') {
-              nutrientVal = food.fat;
-            } else if (nutrient === 'cholesterol') {
-              nutrientVal = food.cholesterol;
-            } else if (nutrient === 'sugar') {
-              nutrientVal = food.sugar;
-            } else if (nutrient === 'protein') {
-              nutrientVal = food.protein;
+          if (nutrient === 'carb') {
+            nutrientVal = food.carbohydrate;
+          } else if (nutrient === 'fiber') {
+            nutrientVal = food.fiber;
+          } else if (nutrient === 'fat') {
+            nutrientVal = food.fat;
+          } else if (nutrient === 'cholesterol') {
+            nutrientVal = food.cholesterol;
+          } else if (nutrient === 'sugar') {
+            nutrientVal = food.sugar;
+          } else if (nutrient === 'protein') {
+            nutrientVal = food.protein;
+          }
+        
+          const lowRange = ranges[nutrient].low;
+          const mediumRange = ranges[nutrient].medium;
+          const isLow = nutrientVal <= lowRange;
+          const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
+        
+          levels.forEach((level) => {
+            if (nutrientString === level) {
+              const weight = 1;
+        
+              if (level === 'Low') {
+                const distanceFromLow = (nutrientVal - lowRange) * 0.1;
+                const reducedValue = Math.min(distanceFromLow, 1);
+                food.rank += isLow ? 1 : (1 - reducedValue) * weight;
+              } else if (level === 'Medium') {
+                const distanceFromMiddle = Math.abs(nutrientVal - (lowRange + mediumRange) / 2) * 0.1;
+                const reducedValue = Math.min(distanceFromMiddle, 1);
+                food.rank += isMedium ? 1 : (1 - reducedValue) * weight;
+              } else if (level === 'High') {
+                const distanceFromHigh = (mediumRange - nutrientVal) * 0.1;
+                const reducedValue = Math.min(distanceFromHigh, 1);
+                food.rank += (nutrientVal > mediumRange) ? 1 : (1 - reducedValue) * weight;
             }
-          
-            const lowRange = ranges[nutrient].low;
-            const mediumRange = ranges[nutrient].medium;
-            const isLow = nutrientVal <= lowRange;
-            const isMedium = nutrientVal > lowRange && nutrientVal <= mediumRange;
-          
-            levels.forEach((level) => {
-              if (nutrientString === level) {
-                const weight = 1;
-          
-                if (level === 'Low') {
-                  const distanceFromLow = (nutrientVal - lowRange) * 0.1;
-                  const reducedValue = Math.min(distanceFromLow, 1);
-                  food.rank += isLow ? 1 : (1 - reducedValue) * weight;
-                } else if (level === 'Medium') {
-                  const distanceFromMiddle = Math.abs(nutrientVal - (lowRange + mediumRange) / 2) * 0.1;
-                  const reducedValue = Math.min(distanceFromMiddle, 1);
-                  food.rank += isMedium ? 1 : (1 - reducedValue) * weight;
-                } else if (level === 'High') {
-                  const distanceFromHigh = (mediumRange - nutrientVal) * 0.1;
-                  const reducedValue = Math.min(distanceFromHigh, 1);
-                  food.rank += (nutrientVal > mediumRange) ? 1 : (1 - reducedValue) * weight;
-              }
-              
-              }
-            });
+            
+            }
           });
-          
-        }
-          
+        });
         
-
-        if (sortString == "Merge") {
-          const startTime = performance.now();
-          mergeSort(foodArr, 0, foodArr.length - 1, "rank");
-          const endTime = performance.now();
-          timeTaken = (endTime - startTime).toFixed(4);
-          document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
-        } else {
-          const startTime = performance.now();
-          shellSort(foodArr, "rank");
-          const endTime = performance.now();
-          timeTaken = (endTime - startTime).toFixed(4);
-          document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
-        }
+      }
         
+      
+
+      if (sortString == "Merge") {
+        const startTime = performance.now();
+        mergeSort(foodArr, 0, foodArr.length - 1, "rank");
+        const endTime = performance.now();
+        timeTaken = (endTime - startTime).toFixed(4);
+        document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
+      } else {
+        const startTime = performance.now();
+        shellSort(foodArr, "rank");
+        const endTime = performance.now();
+        timeTaken = (endTime - startTime).toFixed(4);
+        document.querySelector("#timeTaken").innerText = `Time taken for ${sortString} sort: ${timeTaken} ms`;
+      }
+      
 
 
 
-        const ul = document.querySelector("#foodapp");
-        for(let i = 0; i < 500; i++) {
-          const newLI = document.createElement("li");
-          const ulE = document.createElement("ul");
-          const newLI1 = document.createElement("li");
-          const newLI2 = document.createElement("li");
-          const newLI3 = document.createElement("li");
-          const newLI4 = document.createElement("li");
-          const newLI5 = document.createElement("li");
-          const newLI6 = document.createElement("li");
-          const newLI7 = document.createElement("li");
-          newLI.innerText = foodArr[i].name;
-          newLI1.innerText = "Carbohydrates: " + foodArr[i].carbohydrate;
-          newLI2.innerText = "Sugar: " + foodArr[i].sugar;
-          newLI3.innerText = "Fat: " + foodArr[i].fat;
-          newLI4.innerText = "Fiber: " + foodArr[i].fiber;
-          newLI5.innerText = "Cholesterol: " + foodArr[i].cholesterol;
-          newLI6.innerText = "Protein: " + foodArr[i].protein;
-          newLI7.innerText = "Score: " + foodArr[i].rank;
-          ulE.append(newLI1);
-          ulE.append(newLI2);
-          ulE.append(newLI3);
-          ulE.append(newLI4);
-          ulE.append(newLI5);
-          ulE.append(newLI6);
-          ulE.append(newLI7);
-          newLI.append(ulE);
-          ul.append(newLI);
-        }
-      },
-    });
-  }
+      const ul = document.querySelector("#foodapp");
+      for(let i = 0; i < 500; i++) {
+        const newLI = document.createElement("li");
+        const ulE = document.createElement("ul");
+        const newLI1 = document.createElement("li");
+        const newLI2 = document.createElement("li");
+        const newLI3 = document.createElement("li");
+        const newLI4 = document.createElement("li");
+        const newLI5 = document.createElement("li");
+        const newLI6 = document.createElement("li");
+        const newLI7 = document.createElement("li");
+        newLI.innerText = foodArr[i].name;
+        newLI1.innerText = "Carbohydrates: " + foodArr[i].carbohydrate;
+        newLI2.innerText = "Sugar: " + foodArr[i].sugar;
+        newLI3.innerText = "Fat: " + foodArr[i].fat;
+        newLI4.innerText = "Fiber: " + foodArr[i].fiber;
+        newLI5.innerText = "Cholesterol: " + foodArr[i].cholesterol;
+        newLI6.innerText = "Protein: " + foodArr[i].protein;
+        newLI7.innerText = "Score: " + foodArr[i].rank;
+        ulE.append(newLI1);
+        ulE.append(newLI2);
+        ulE.append(newLI3);
+        ulE.append(newLI4);
+        ulE.append(newLI5);
+        ulE.append(newLI6);
+        ulE.append(newLI7);
+        newLI.append(ulE);
+        ul.append(newLI);
+      }
+    },
+  });
+}
   
 
   const clickMe = () => {
@@ -273,8 +254,8 @@ function shellSort(arr,prop)
     window.location.href = "index.html";
   }
 
-if (window.location.pathname.includes('searchres.html')) {
+if(window.location.pathname.includes('searchres.html')) {
   document.addEventListener('DOMContentLoaded', () => {
-    fetchAndParseCSV('food.csv');
+  fetchAndParseCSV('food.csv');
   });
 }
