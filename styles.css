@@ -10,13 +10,14 @@
 		background-position: 0% 50%;
 	}
 }
+
 h1 {
     font-size: 4em;
     text-align: center;
     font-family: "Plus Jakarta Display", sans-serif;
 }
 
-#shit select {
+#selectDiv select {
     margin-top: 3em;
     width: 10em;
     border-radius: 2em;
@@ -24,7 +25,7 @@ h1 {
     font-family: "Plus Jakarta Display";
 }
 
-#shit span {
+#selectDiv span {
     font-weight: bold;
     font-size: 2em;
     text-align: center;
@@ -34,7 +35,7 @@ h1 {
     transform: translateY(1.4em);
 }
 
-#shit {
+#selectDiv {
     margin-top: 2em;
 }
 
@@ -65,6 +66,7 @@ h1 {
     height: auto;
     
 }
+
 #sort {
     font-weight: bold;;
     font-size: 2em;
@@ -72,6 +74,7 @@ h1 {
     font-family: "Plus Jakarta Display", sans-serif;
     display: inline;
 }
+
 #sort span {
     font-weight: bold;
     text-align: left;
@@ -90,6 +93,7 @@ h1 {
 #sz {
     margin-left: 5em;
 }
+
 .option-container {
     display: flex;
     align-items: center;
@@ -114,70 +118,76 @@ h1 {
     color: white;
     text-decoration: none;
 }
-  li {
-    font-family: "Plus Jakarta Display";
-    font-weight: bold;
-    
+
+li {
+  font-family: "Plus Jakarta Display";
+  font-weight: bold;
+  
+}
+
+#olz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+#timeTaken {
+  text-align: center;
+  font-weight: bold;
+  font-family: "Plus Jakarta Display";
+}
+
+#foodapp {
+  font-family: 'Times New Roman', Times, serif;
+}
+
+#btnm2 {
+  border-radius: 100px;
+  font-weight: bold;
+  font-family: "Plus Jakarta Display";
+  font-size: 1.2em;
+  width: auto;
+  height: auto;
+  display: inline;
+}
+
+#legend {
+  position: absolute;
+  left: 0;
+}
+
+@media (max-width: 900px) {
+  #btnm2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
-  #olz {
+
+  #legend {
+    position: static;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
-   
+    right: auto;
   }
+}
 
-  #timeTaken {
-    text-align: center;
-    font-weight: bold;
-    font-family: "Plus Jakarta Display";
+@media (max-height: 700px) {
+  #selectDiv span {
+    font-size: 1.5em;
   }
-
-  #foodapp {
-    font-family: 'Times New Roman', Times, serif;
+  #h1b {
+    font-size: 3.5em;
   }
+}
 
-  #btnm2 {
-    border-radius: 100px;
-    font-weight: bold;
-    font-family: "Plus Jakarta Display";
-    font-size: 1.2em;
-    width: auto;
-    height: auto;
+@media (min-width: 768px) {
+  .button-container {
+    transform: translateY(-14em);
     display: inline;
+    margin-top: 5em;
+    padding-top: 5em;
   }
-  #legend {
-    position: absolute;
-    left: 0;
-  }
-  @media (max-width: 900px) {
-    #btnm2 {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #legend {
-      position: static;
-      display: flex;
-      justify-content: center;
-      right: auto;
-    }
-  }
-  
-  @media (max-height: 700px) {
-    #shit span {
-      font-size: 1.5em;
-    }
-    #h1b {
-      font-size: 3.5em;
-    }
-  }
-  @media (min-width: 768px) {
-    .button-container {
-      transform: translateY(-14em);
-      display: inline;
-      margin-top: 5em;
-      padding-top: 5em;
-    }
-  }
+}
   
