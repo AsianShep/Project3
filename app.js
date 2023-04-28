@@ -1,49 +1,53 @@
+//food class to store food data in objects
 class Food {
-    constructor(name, carbohydrate, cholesterol, fat, fiber, sugar, protein, alpha_Carotene, beta_Carotene, beta_Cryptoxanthin, choline, lutein_And_Zeaxanthin, lycopene, niacin, retinol, riboflavin, selenium, thiamin, water, monosaturated_Fat, polysaturated_Fat, saturated_Fat, calcium, copper, iron, magnesium, phosphorus, potassium, sodium, zinc, vitaminA, vitaminB12, vitaminB6, vitaminC, vitaminE, vitaminK) {
-      this.name = name;
-      this.carbohydrate = carbohydrate;
-      this.cholesterol = cholesterol;
-      this.fat = fat;
-      this.fiber = fiber;
-      this.sugar = sugar;
-      this.protein = protein;
-		  this.alpha_Carotene = alpha_Carotene;
-		  this.beta_Carotene = beta_Carotene;
-		  this.beta_Cryptoxanthin = beta_Cryptoxanthin;
-		  this.choline = choline;
-		  this.lutein_And_Zeaxanthin = lutein_And_Zeaxanthin;
-		  this.lycopene = lycopene;
-		  this.niacin = niacin;
-		  this.retinol = retinol;
-		  this.riboflavin = riboflavin;
-		  this.selenium = selenium;
-		  this.thiamin = thiamin;
-		  this.water = water;
-		  this.monosaturated_Fat = monosaturated_Fat;
-		  this.polysaturated_Fat = polysaturated_Fat;
-		  this.saturated_Fat = saturated_Fat;
-		  this.calcium = calcium;
-		  this.copper = copper;
-		  this.iron = iron;
-		  this.magnesium = magnesium;
-		  this.phosphorus = phosphorus;
-		  this.potassium = potassium;
-		  this.sodium = sodium;
-		  this.zinc = zinc;
-		  this.vitaminA = vitaminA;
-		  this.vitaminB12 = vitaminB12;
-		  this.vitaminB6 = vitaminB6;
-		  this.vitaminC = vitaminC;
-		  this.vitaminE = vitaminE;
-		  this.vitaminK = vitaminK;
-      this.rank = 0;
-    }
-  }
+  constructor(name, carbohydrates, cholesterol, fat, fiber, sugar, protein, alphacarotene, betacarotene, betacryptoxanthin,
+    choline, luteinandzeaxanthin, lycopene, niacin, retinol, riboflavin, selenium, thiamin, water, monosaturatedfat, polysaturatedfat,
+    saturatedfat, calcium, copper, iron, magnesium, phosphorus, potassium, sodium, zinc, vitamina, vitaminb12, vitaminb6, vitaminc, vitamine, vitamink) {
 
+    this.name = name;
+    this.carbohydrates = carbohydrates;
+    this.cholesterol = cholesterol;
+    this.fat = fat;
+    this.fiber = fiber;
+    this.sugar = sugar;
+    this.protein = protein;
+    this.alphacarotene = alphacarotene;
+    this.betacarotene = betacarotene;
+    this.betacryptoxanthin = betacryptoxanthin;
+    this.choline = choline;
+    this.luteinandzeaxanthin = luteinandzeaxanthin;
+    this.lycopene = lycopene;
+    this.niacin = niacin;
+    this.retinol = retinol;
+    this.riboflavin = riboflavin;
+    this.selenium = selenium;
+    this.thiamin = thiamin;
+    this.water = water;
+    this.monosaturatedfat = monosaturatedfat;
+    this.polysaturatedfat = polysaturatedfat;
+    this.saturatedfat = saturatedfat;
+    this.calcium = calcium;
+    this.copper = copper;
+    this.iron = iron;
+    this.magnesium = magnesium;
+    this.phosphorus = phosphorus;
+    this.potassium = potassium;
+    this.sodium = sodium;
+    this.zinc = zinc;
+    this.vitamina = vitamina;
+    this.vitaminb12 = vitaminb12;
+    this.vitaminb6 = vitaminb6;
+    this.vitaminc = vitaminc;
+    this.vitamine = vitamine;
+    this.vitamink = vitamink;
+    this.rank = 0;
+  }
+}
+
+
+//Food object array and selections are saved into variables when page loaded (default values)
 let foodArr = [];
 let foodArrz = [];
-
-
 let carbString = localStorage.getItem('carbString');
 let fatString = localStorage.getItem('fatString');
 let cholesterolString = localStorage.getItem('cholesterolString');
@@ -53,7 +57,7 @@ let proteinString = localStorage.getItem('proteinString');
 let sortString = localStorage.getItem('sortString');
 let timeTaken = 0;
   
-//referenced from lecture slides
+//Merge sort referenced from lecture slides
 let merge = (arr, left, mid, right, prop) => {
     let n1 = mid - left + 1;
     let n2 = right - mid;
@@ -104,22 +108,18 @@ let mergeSort = (arr, left, right, prop) => {
 
 }
   
-
+//Shell sort referenced from lecture slides
 let shellSort = (arr,prop) => {
-    let n = arr.length;
-        for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2))
-        {
-          
-            for (let i = gap; i < n; i += 1)
-            {
-              
-                let temp = arr[i][prop];
-                let j;
-                for (j = i; j >= gap && arr[j - gap][prop] < temp; j -= gap) {
-                    [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
-                  }
-            }
-        }
+  let n = arr.length;
+    for (let gap = Math.floor(n/2); gap > 0; gap = Math.floor(gap/2)) {
+      for (let i = gap; i < n; i += 1) {
+          let temp = arr[i][prop];
+          let j;
+          for (j = i; j >= gap && arr[j - gap][prop] < temp; j -= gap) {
+            [arr[j], arr[j - gap]] = [arr[j - gap], arr[j]];
+          }
+      }
+    }
 }
 
 let calcScore = () => {
@@ -143,7 +143,7 @@ let calcScore = () => {
     
     
       if (nutrient === 'carb') {
-        nutrientVal = food.carbohydrate;
+        nutrientVal = food.carbohydrates;
       } else if (nutrient === 'fiber') {
         nutrientVal = food.fiber;
       } else if (nutrient === 'fat') {
@@ -246,7 +246,7 @@ let appendItems = () => {
 
     infoLabels.forEach((label) => {
       const li = document.createElement("li");
-      li.innerText = `${label}: ${foodArr[i][label.toLowerCase().replace(/ /g, "_")].replace(/_/g, " ")}`;
+      li.innerText = `${label}: ${foodArr[i][label.toLowerCase().replace(/ /g, "")]}`;
       ulE.append(li);
     });
 
@@ -305,7 +305,7 @@ async function fetchAndParseCSV(url) {
         parseFloat(row["Data.Vitamins.Vitamin E"]),
         parseFloat(row["Data.Vitamins.Vitamin K"])
       ));
-      foodArr = foodArrz.filter(food => !isNaN(food.carbohydrate));
+      foodArr = foodArrz.filter(food => !isNaN(food.carbohydrates));
     },
   });
 }
