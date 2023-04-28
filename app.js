@@ -122,6 +122,7 @@ let shellSort = (arr,prop) => {
     }
 }
 
+//function that calculates the score of each food based on what the user selects
 let calcScore = () => {
   const ranges = {
     carb: { low: 15, medium: 30 },
@@ -183,6 +184,7 @@ let calcScore = () => {
   }
 }
 
+//calls respective sort function depending on what user selects
 let callSort = () => {
   if (sortString == "Merge") {
     const startTime = performance.now();
@@ -199,6 +201,7 @@ let callSort = () => {
   }
 }
 
+//function that appends elements to page based on sorted list with respective labels
 let appendItems = () => {
   const ul = document.querySelector("#foodapp");
   const infoLabels = [
@@ -259,7 +262,7 @@ let appendItems = () => {
   }
 }
 
-
+//function that fetches and parses our CSV data file
 async function fetchAndParseCSV(url) {
   const response = await fetch(url);
   const csvData = await response.text();
@@ -310,7 +313,7 @@ async function fetchAndParseCSV(url) {
   });
 }
   
-
+  //function that stores values of user selections into variables when user clicks search button
   const resultsPage = () => {
     let carbOption = document.querySelector(".carb-select");
     carbString = carbOption.options[carbOption.selectedIndex].text;
@@ -337,12 +340,12 @@ async function fetchAndParseCSV(url) {
     window.location.href = "searchres.html";
   }
   
-
+  //function that returns user to home page when user clicks Go Back button
   const homePage = () => {
     window.location.href = "index.html";
   }
 
-
+  //function that calls on calcScore callSort and appenItems once the CSV file has been parsed
   async function run() {
     await fetchAndParseCSV('food.csv');
     calcScore();
@@ -350,7 +353,7 @@ async function fetchAndParseCSV(url) {
     appendItems();
   }
 
-
+//checks if the current page is the results page
 if(window.location.pathname.includes('searchres.html')) {
   document.addEventListener('DOMContentLoaded', () => {
     run();
